@@ -1,9 +1,10 @@
 package com.moham.contacts.features.contacts.viewmodel
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
-import com.google.firebase.auth.FirebaseUser
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.moham.contacts.model.entities.Contact
 import com.moham.contacts.model.repo.Repository
 import com.moham.contacts.utils.Resource
@@ -24,22 +25,22 @@ class ContactsViewModel @ViewModelInject constructor(
     fun getContacts() {
         viewModelScope.launch {
             _contacts.value = Resource.loading()
-           val response =  repository.getContacts()
-            if (response.status == SUCCESS){
+            val response = repository.getContacts()
+            if (response.status == SUCCESS) {
                 _contacts.value = response
-            }else{
+            } else {
                 _contacts.value = Resource.error(response.message)
             }
         }
     }
 
-    fun deleteContact(idPhone:String) {
+    fun deleteContact(idPhone: String) {
         viewModelScope.launch {
             _isDeleted.value = Resource.loading()
-           val response =  repository.deleteContact(idPhone)
-            if (response.status == SUCCESS){
+            val response = repository.deleteContact(idPhone)
+            if (response.status == SUCCESS) {
                 _isDeleted.value = response
-            }else{
+            } else {
                 _isDeleted.value = Resource.error(response.message)
             }
         }

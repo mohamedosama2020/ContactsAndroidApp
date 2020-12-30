@@ -77,9 +77,9 @@ class ContactsActivity : AppCompatActivity() {
     }
 
     private fun handleSuccessResponse(contacts: List<Contact>?) {
-        if(contacts.isNullOrEmpty()){
+        if (contacts.isNullOrEmpty()) {
             view.emptyView.visibility = View.VISIBLE
-        }else{
+        } else {
             view.emptyView.visibility = View.GONE
             contactsAdapter.setContacts(contacts)
         }
@@ -88,7 +88,7 @@ class ContactsActivity : AppCompatActivity() {
 
     private fun initUiComponents() {
 
-        contactsAdapter =  ContactsAdapter(this){ contact, action ->
+        contactsAdapter = ContactsAdapter(this) { contact, action ->
             when (action) {
                 SwipeAction.Call -> callContact(contact.phone)
                 SwipeAction.Delete -> deleteContact(contact.phone)
@@ -101,18 +101,17 @@ class ContactsActivity : AppCompatActivity() {
 
         view.rvContacts.apply {
             layoutManager = LinearLayoutManager(this@ContactsActivity)
-            adapter=contactsAdapter
+            adapter = contactsAdapter
         }
 
         callData()
     }
 
-    private fun callContact(phone:String) {
+    private fun callContact(phone: String) {
         startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phone")))
     }
 
     private fun deleteContact(idPhone: String) {
-        Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show()
         viewModel.deleteContact(idPhone)
         viewModel.getContacts()
     }

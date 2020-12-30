@@ -7,6 +7,7 @@ import com.moham.contacts.model.entities.Contact
 import com.moham.contacts.utils.Resource
 import com.moham.contacts.utils.Resource.Status.SUCCESS
 import kotlinx.coroutines.tasks.await
+import java.lang.Exception
 import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -40,7 +41,7 @@ class RemoteDataSource @Inject constructor(
     suspend fun addContact(name: String, idPhone: String): Resource<Boolean> {
 
         val isPhoneExists = isPhoneExist(idPhone)
-        return if(isPhoneExists.status == SUCCESS){
+        return if (isPhoneExists.status == SUCCESS) {
             suspendCoroutine { continuation ->
                 firestore.collection("users").document("${auth.currentUser?.uid}")
                     .collection("contacts").document(idPhone)
@@ -50,12 +51,12 @@ class RemoteDataSource @Inject constructor(
                         continuation.resume(Resource.error(it.localizedMessage))
                     }
             }
-        }else{
+        } else {
             isPhoneExists
         }
     }
 
-    suspend fun deleteContact(idPhone:String):Resource<Boolean> =
+    suspend fun deleteContact(idPhone: String): Resource<Boolean> =
         suspendCoroutine { continuation ->
             firestore.collection("users").document("${auth.currentUser?.uid}")
                 .collection("contacts").document(idPhone)
@@ -69,14 +70,17 @@ class RemoteDataSource @Inject constructor(
 
     suspend fun isPhoneExist(idPhone: String): Resource<Boolean> {
 
-        val result = firestore.collection("users")
-            .document("${auth.currentUser?.uid}")
-            .collection("contacts").document(idPhone).get().await()
-
-        return if(result.exists()){
-            Resource.error("Phone Exists")
-        }else{
-            Resource.success(result.exists())
+        return try {
+            val result = firestore.collection("users")
+                .document("${auth.currentUser?.uid}")
+                .collection("contacts").document(idPhone).get().await()
+            if (result.exists()) {
+                Resource.error("Phone Exists")
+            } else {
+                Resource.success(result.exists())
+            }
+        }catch(e:Exception){
+            Resource.error("Error Occurred Please Check Your Connection")
         }
     }
 

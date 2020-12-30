@@ -28,17 +28,17 @@
                 android:id="@+id/ivCall"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/call"
                 android:scaleType="centerCrop"
-                android:src="@drawable/call"
-                android:contentDescription="@string/call" />
+                android:src="@drawable/call" />
 
             <ImageView
                 android:id="@+id/ivDelete"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/delete"
                 android:scaleType="centerCrop"
-                android:src="@drawable/delete"
-                android:contentDescription="@string/delete"/>
+                android:src="@drawable/delete" />
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,8 +53,8 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="8dp"
-                android:transitionName="image"
                 android:src="@color/design_default_color_primary_variant"
+                android:transitionName="image"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F7F7F7"
     tools:context=".features.addcontact.view.AddContactActivity">
 
     <ImageView
@@ -32,34 +33,94 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:background="@color/purple_700"
         android:layout_height="300dp"
         android:layout_marginTop="8dp"
+        android:background="@color/purple_700"
         android:gravity="center"
+        android:orientation="vertical"
         android:transitionName="image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/tvContactInfo">
+
         <ImageView
             android:id="@+id/ivContactImage"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginTop="24dp"
+            android:contentDescription="@string/contact_info"
             android:src="@drawable/ic_baseline_person"
-            app:tint="@color/white"
-            android:contentDescription="@string/contact_info" />
+            app:tint="@color/white" />
 
         <TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:textColor="@color/white"
             android:textSize="24sp"
-            android:layout_marginTop="16dp"
             tools:text="Mohamed Osama" />
     </LinearLayout>
 
+    <androidx.cardview.widget.CardView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="6dp"
+        app:cardCornerRadius="8dp"
+        android:padding="3dp"
+        app:contentPadding="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            tools:layout_editor_absoluteX="-26dp"
+            tools:layout_editor_absoluteY="436dp">
+
+            <ImageView
+                android:id="@+id/ivPhone"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="12dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_baseline_local_phone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/purple_700"
+                android:contentDescription="@string/phone" />
+
+            <TextView
+                android:id="@+id/tvPhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/ivPhone"
+                app:layout_constraintTop_toTopOf="@+id/ivPhone"
+                tools:text="Mohamed Osama" />
+
+            <TextView
+                android:id="@+id/tvPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#98999F"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivPhone"
+                app:layout_constraintStart_toStartOf="@+id/tvPhoneNumber"
+                app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber"
+                android:text="@string/phone" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
 
 

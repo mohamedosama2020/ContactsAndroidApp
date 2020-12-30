@@ -4,6 +4,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.firestoreSettings
 import com.google.firebase.ktx.Firebase
 import com.moham.contacts.model.remote.RemoteDataSource
 import com.moham.contacts.model.repo.Repository
@@ -18,10 +19,13 @@ import javax.inject.Singleton
 object AppModule {
 
 
-
     @Singleton
     @Provides
-    fun provideFireStore() = Firebase.firestore
+    fun provideFireStore(): FirebaseFirestore {
+        val fireStore = Firebase.firestore
+        fireStore.firestoreSettings = firestoreSettings { isPersistenceEnabled = true }
+        return  fireStore
+    }
 
     @Singleton
     @Provides
@@ -30,7 +34,8 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRemoteDataSource(auth: FirebaseAuth,firestore: FirebaseFirestore) = RemoteDataSource(auth,firestore)
+    fun provideRemoteDataSource(auth: FirebaseAuth, firestore: FirebaseFirestore) =
+        RemoteDataSource(auth, firestore)
 
 
     @Singleton

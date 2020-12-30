@@ -2,8 +2,10 @@ package com.moham.contacts.features.addcontact.viewmodel
 
 import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
-import com.google.firebase.auth.FirebaseUser
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.moham.contacts.model.repo.Repository
 import com.moham.contacts.utils.Resource
 import com.moham.contacts.utils.Resource.Status.SUCCESS
@@ -17,16 +19,16 @@ class AddContactViewModel @ViewModelInject constructor(
     val contactAdded: LiveData<Resource<Boolean>> = _contactAdded
 
 
-    fun addContact(name:String,idPhone:String) {
+    fun addContact(name: String, idPhone: String) {
         viewModelScope.launch {
             _contactAdded.value = Resource.loading()
-            val response =  repository.addContact(name,idPhone)
-            if (response.status == SUCCESS){
+            val response = repository.addContact(name, idPhone)
+            if (response.status == SUCCESS) {
                 _contactAdded.value = response
-                Log.d("ContactsView: ","${response.data}")
-            }else{
+                Log.d("ContactsView: ", "${response.data}")
+            } else {
                 _contactAdded.value = Resource.error(response.message)
-                Log.d("ContactsView: ","${response.message}")
+                Log.d("ContactsView: ", "${response.message}")
             }
         }
     }

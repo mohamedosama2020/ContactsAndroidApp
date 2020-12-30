@@ -1,6 +1,6 @@
 package com.moham.contacts.features.contacts.adapter
 
-enum class SwipeAction{
+enum class SwipeAction {
     Call,
     Delete
 }

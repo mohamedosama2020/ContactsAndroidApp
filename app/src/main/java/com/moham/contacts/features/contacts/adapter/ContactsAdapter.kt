@@ -13,7 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.moham.contacts.R
 import com.moham.contacts.features.contactinfo.ContactInfoActivity
 import com.moham.contacts.features.contactinfo.ContactInfoActivity.Companion.INTENT_EXTRA
-import com.moham.contacts.features.contacts.adapter.SwipeAction.*
+import com.moham.contacts.features.contacts.adapter.SwipeAction.Call
+import com.moham.contacts.features.contacts.adapter.SwipeAction.Delete
 import com.moham.contacts.model.entities.Contact
 
 class ContactsAdapter(

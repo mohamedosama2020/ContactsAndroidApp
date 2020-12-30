@@ -4,14 +4,13 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class Contact(
-    val name: String="",
-    val phone: String =""
+    val name: String = "",
+    val phone: String = ""
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString().toString(),
         parcel.readString().toString()
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)

@@ -1,17 +1,20 @@
 package com.moham.contacts.features.login.view
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.firestoreSettings
+import com.google.firebase.ktx.Firebase
 import com.moham.contacts.databinding.ActivityLoginBinding
 import com.moham.contacts.features.contacts.view.ContactsActivity
-import com.moham.contacts.utils.Resource.Status.*
 import com.moham.contacts.features.login.viewmodel.LoginViewModel
+import com.moham.contacts.utils.Resource.Status.*
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -29,15 +32,13 @@ class LoginActivity : AppCompatActivity() {
         view = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(view.root)
 
-
         if (auth.currentUser != null) {
-            startActivity(Intent(this,ContactsActivity::class.java))
+            startActivity(Intent(this, ContactsActivity::class.java))
             finish()
         } else {
             setupObservers()
         }
         clicks()
-
 
 
 //        //Check If Exists
@@ -55,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun clicks(){
+    private fun clicks() {
         view.btnSignIn.setOnClickListener {
             viewModel.signIn()
         }
@@ -67,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
                 SUCCESS -> {
                     view.progressBar.visibility = View.INVISIBLE
                     Toast.makeText(this, "Logged In Successfully", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this,ContactsActivity::class.java))
+                    startActivity(Intent(this, ContactsActivity::class.java))
                     finish()
                 }
                 ERROR -> {
@@ -75,7 +76,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "Error: ${it.message}", Toast.LENGTH_SHORT).show()
                 }
 
-                LOADING ->{
+                LOADING -> {
                     view.progressBar.visibility = View.VISIBLE
                 }
 
