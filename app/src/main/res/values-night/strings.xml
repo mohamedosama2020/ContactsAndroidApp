@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sign_in">Sign In</string>
+    <string name="contacts_app">Contacts App</string>
+    <string name="add">Add</string>
+    <string name="back">Back</string>
+    <string name="phone">Phone</string>
+    <string name="you_have_no_contacts_press_to_add">You Have No Contacts Press + To Add</string>
+</resources>
